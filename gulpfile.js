@@ -20,7 +20,7 @@ var notify = require('gulp-notify');
 
 var src = {
     src:'./',
-    scss:'./src/scss/*.scss',
+    scss:'./src/scss/**/*.scss',
     images:'./src/assets/images/**/*.+(jpg|jpeg|png|gif)',
     svgs:'./src/assets/images/**/*.+(svg)',
     js:'./src/js/*.js',
@@ -117,15 +117,15 @@ function bs_reload(done) {
 
 function watch(){
     gulp.watch(src.src+'*.html',bs_reload);
-    gulp.watch(src.scss,scss);
-    gulp.watch(src.scss,bs_reload);
-    gulp.watch(src.js,js_concat);
-    gulp.watch(src.js,js_compress);
-    gulp.watch(src.js,bs_reload);
-    gulp.watch(src.images,imagemin);
-    gulp.watch(src.images,bs_reload);
-    gulp.watch(src.svgs,svgmin);
-    gulp.watch(src.svgs,bs_reload);
+    gulp.watch(src.scss,gulp.series(scss,bs_reload));
+    //gulp.watch(src.scss,bs_reload);
+    gulp.watch(src.js,gulp.series(gulp.parallel(js_concat,js_compress),bs_reload));
+    //gulp.watch(src.js,js_compress);
+    //gulp.watch(src.js,bs_reload);
+    gulp.watch(src.images,gulp.series(imagemin,bs_reload));
+    //gulp.watch(src.images,bs_reload);
+    gulp.watch(src.svgs,gulp.series(svgmin,bs_reload));
+    //gulp.watch(src.svgs,bs_reload);
 }
 
 
@@ -137,6 +137,4 @@ exports.imagemin = imagemin;
 exports.svgmin = svgmin;
 exports.watch = watch;
 exports.bs = bs;
-exports.default = gulp.series(
-    gulp.parallel(bs,watch)
-);
+exports.default = gulp.parallel(bs,watch);
