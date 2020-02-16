@@ -72,7 +72,7 @@ function Imagemin() {
        .pipe( gulp.dest(dist.images));
 }
 
-function svgmin(){
+function Svgmin(){
     // svg
     return gulp.src(src.svgs)
         .pipe( changed(dist.images) )
@@ -95,7 +95,7 @@ function js_concat(){
 
 // compress js file(s)
 function js_compress() {
-    gulp.src(dist.js+'bundle.js')
+    return gulp.src(dist.js+'bundle.js')
         .pipe( plumber() )
         .pipe( uglify() )
         .pipe( rename( 'bundle.min.js' ) )
@@ -141,4 +141,5 @@ exports.imagemin = Imagemin;
 exports.svgmin = svgmin;
 exports.watch = watch;
 exports.bs = bs;
+exports.build = gulp.series(scss,js_concat,js_compress,Imagemin,Svgmin);
 exports.default = gulp.parallel(bs,watch);
