@@ -50,7 +50,7 @@ function scss(){
                 })]
             ))
         .pipe( sourcemaps.write())
-        .pipe( gulp.dest(dist.dist));
+        .pipe( gulp.dest(dist.css));
 }
 
 
