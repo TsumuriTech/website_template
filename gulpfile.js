@@ -122,14 +122,9 @@ function bs_reload(done) {
 function watch(){
     gulp.watch(src.src+'*.html',bs_reload);
     gulp.watch(src.scss,gulp.series(scss,bs_reload));
-    //gulp.watch(src.scss,bs_reload);
     gulp.watch(src.js,gulp.series(gulp.parallel(js_concat,js_compress),bs_reload));
-    //gulp.watch(src.js,js_compress);
-    //gulp.watch(src.js,bs_reload);
     gulp.watch(src.images,gulp.series(imagemin,bs_reload));
-    //gulp.watch(src.images,bs_reload);
     gulp.watch(src.svgs,gulp.series(svgmin,bs_reload));
-    //gulp.watch(src.svgs,bs_reload);
 }
 
 
