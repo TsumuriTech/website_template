@@ -17,43 +17,46 @@ var uglify       = require( 'gulp-uglify' );
 var browserSync  = require( 'browser-sync' );
 var postcss = require('gulp-postcss');
 var notify = require('gulp-notify');
+var mozjpeg = require('imagemin-mozjpeg');
 
 var src = {
     src:'./',
-    scss:'./src/scss/*.scss',
-    images:'./src/assets/images/**/*.+(jpg|jpeg|png|gif)',
-    svgs:'./src/assets/images/**/*.+(svg)',
-    js:'./src/js/*.js',
+    scss:'./src/scss/**/*.scss',
+    images:'./src/images/**/*.+(jpg|jpeg|png|gif)',
+    svgs:'./src/images/**/*.+(svg)',
+    js:'./src/js/*.js'
 }
 
 var dist = {
     dist:'./dist/',
     images:'./dist/images/',
-    bundlejs:'./dist/bundle.js'
+    js:'./dist/js/',
+    css:'dist/css/'
 }
 
 // Sass
 function scss(){
     return gulp.src(src.scss)
         .pipe( plumber({errorHandler: notify.onError("Error: <%= error.message %>")}) )
-        .pipe( progeny() )
-        .pipe( sourcemaps.init() )
-        .pipe( sass( {
+        .pipe( progeny())
+        .pipe( sourcemaps.init())
+        .pipe( sass({
             outputStyle: 'expanded'
-        } ) )
+        }))
         .pipe( postcss(
-                [autoprefixer( {
-                    "overrideBrowserlist": ['last 2 version', 'ie >= 11', 'Android >= 4.4'],
+                [autoprefixer({
+                    "overrideBrowserlist": ['default'],//'last 2 version', 'ie >= 11', 'Android >= 4.'
                     cascade: false
-                } )]
-            )
-        )
-        .pipe( sourcemaps.write() )
+                })]
+            ))
+        .pipe( sourcemaps.write())
         .pipe( gulp.dest(dist.dist));
 }
 
+
 // imagemin
-function imagemin() {
+//関数の干渉という初歩的なミスだった
+function Imagemin() {
     // jpeg,png,gif
    return gulp.src(src.images)
        .pipe( changed(dist.images) )
@@ -64,8 +67,8 @@ function imagemin() {
                interlaced: false,
                optimizationLevel: 3,
                colors: 180
-           } )
-       ] ) )
+           })
+       ]))
        .pipe( gulp.dest(dist.images));
 }
 
@@ -74,8 +77,9 @@ function svgmin(){
     return gulp.src(src.svgs)
         .pipe( changed(dist.images) )
         .pipe( svgmin() )
-        .pipe( gulp.dest(dist.images) );
+        .pipe( gulp.dest(dist.images));
 }
+
 
 // concat js file(s)
 function js_concat(){
@@ -86,16 +90,16 @@ function js_concat(){
         .pipe( jshint() )
         .pipe( jshint.reporter( 'default' ) )
         .pipe( concat( 'bundle.js' ) )
-        .pipe( gulp.dest(dist.dist) );
+        .pipe( gulp.dest(dist.js) );
 }
 
 // compress js file(s)
 function js_compress() {
-    gulp.src(dist.bundlejs)
+    gulp.src(dist.js+'bundle.js')
         .pipe( plumber() )
         .pipe( uglify() )
         .pipe( rename( 'bundle.min.js' ) )
-        .pipe( gulp.dest(dist.dist) );
+        .pipe( gulp.dest(dist.js) );
 }
 
 // Browser Sync
@@ -117,15 +121,15 @@ function bs_reload(done) {
 
 function watch(){
     gulp.watch(src.src+'*.html',bs_reload);
-    gulp.watch(src.scss,scss);
-    gulp.watch(src.scss,bs_reload);
-    gulp.watch(src.js,js_concat);
-    gulp.watch(src.js,js_compress);
-    gulp.watch(src.js,bs_reload);
-    gulp.watch(src.images,imagemin);
-    gulp.watch(src.images,bs_reload);
-    gulp.watch(src.svgs,svgmin);
-    gulp.watch(src.svgs,bs_reload);
+    gulp.watch(src.scss,gulp.series(scss,bs_reload));
+    //gulp.watch(src.scss,bs_reload);
+    gulp.watch(src.js,gulp.series(gulp.parallel(js_concat,js_compress),bs_reload));
+    //gulp.watch(src.js,js_compress);
+    //gulp.watch(src.js,bs_reload);
+    gulp.watch(src.images,gulp.series(imagemin,bs_reload));
+    //gulp.watch(src.images,bs_reload);
+    gulp.watch(src.svgs,gulp.series(svgmin,bs_reload));
+    //gulp.watch(src.svgs,bs_reload);
 }
 
 
@@ -133,10 +137,8 @@ exports.bs_reload = bs_reload;
 exports.scss = scss;
 exports.js_concat = js_concat;
 exports.js_compress = js_compress;
-exports.imagemin = imagemin;
+exports.imagemin = Imagemin;
 exports.svgmin = svgmin;
 exports.watch = watch;
 exports.bs = bs;
-exports.default = gulp.series(
-    gulp.parallel(bs,watch)
-);
+exports.default = gulp.parallel(bs,watch);
