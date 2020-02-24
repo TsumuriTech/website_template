@@ -21,17 +21,19 @@ var mozjpeg = require('imagemin-mozjpeg');
 
 var src = {
     src:'./',
-    scss:'./src/scss/**/*.scss',
+    scss:'./src/scss/*.scss',
+    wscss:'./src/scss/**/*.scss',
     images:'./src/images/**/*.+(jpg|jpeg|png|gif)',
     svgs:'./src/images/**/*.+(svg)',
-    js:'./src/js/*.js'
+    js:'./src/js/*.js',
+    jslib:'./src/js/lib/*.js'
 }
 
 var dist = {
     dist:'./dist/',
     images:'./dist/images/',
     js:'./dist/js/',
-    css:'dist/css/'
+    css:'./dist/css/'
 }
 
 // Sass
@@ -50,7 +52,7 @@ function scss(){
                 })]
             ))
         .pipe( sourcemaps.write())
-        .pipe( gulp.dest(dist.dist));
+        .pipe( gulp.dest(dist.css));
 }
 
 
@@ -72,7 +74,7 @@ function Imagemin() {
        .pipe( gulp.dest(dist.images));
 }
 
-function svgmin(){
+function Svgmin(){
     // svg
     return gulp.src(src.svgs)
         .pipe( changed(dist.images) )
@@ -84,6 +86,7 @@ function svgmin(){
 // concat js file(s)
 function js_concat(){
     return gulp.src( [
+        src.jslib,
         src.js
     ] )
         .pipe( plumber() )
@@ -95,7 +98,7 @@ function js_concat(){
 
 // compress js file(s)
 function js_compress() {
-    gulp.src(dist.js+'bundle.js')
+    return gulp.src(dist.js+'bundle.js')
         .pipe( plumber() )
         .pipe( uglify() )
         .pipe( rename( 'bundle.min.js' ) )
@@ -120,11 +123,16 @@ function bs_reload(done) {
 }
 
 function watch(){
-    gulp.watch(src.src+'*.html',bs_reload);
-    gulp.watch(src.scss,gulp.series(scss,bs_reload));
-    gulp.watch(src.js,gulp.series(gulp.parallel(js_concat,js_compress),bs_reload));
-    gulp.watch(src.images,gulp.series(imagemin,bs_reload));
-    gulp.watch(src.svgs,gulp.series(svgmin,bs_reload));
+    //gulp.watch(src.src+'*.html',bs_reload);
+    gulp.watch(src.wscss,scss);
+    //gulp.watch(src.scss,bs_reload);
+    gulp.watch(src.js,gulp.series(js_concat,js_compress));
+    //gulp.watch(src.js,js_compress);
+    //gulp.watch(src.js,bs_reload);
+    gulp.watch(src.images,Imagemin);
+    //gulp.watch(src.images,bs_reload);
+    gulp.watch(src.svgs,Svgmin);
+    //gulp.watch(src.svgs,bs_reload);
 }
 
 
@@ -133,7 +141,8 @@ exports.scss = scss;
 exports.js_concat = js_concat;
 exports.js_compress = js_compress;
 exports.imagemin = Imagemin;
-exports.svgmin = svgmin;
+exports.svgmin = Svgmin;
 exports.watch = watch;
 exports.bs = bs;
-exports.default = gulp.parallel(bs,watch);
+exports.build = gulp.series(scss,js_concat,js_compress,Imagemin,Svgmin);
+exports.default = gulp.series(watch);
