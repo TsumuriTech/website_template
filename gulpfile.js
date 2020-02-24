@@ -123,15 +123,15 @@ function bs_reload(done) {
 }
 
 function watch(){
-    gulp.watch(src.src+'*.html',bs_reload);
-    gulp.watch(src.wscss,gulp.series(scss,bs_reload));
+    //gulp.watch(src.src+'*.html',bs_reload);
+    gulp.watch(src.wscss,scss);
     //gulp.watch(src.scss,bs_reload);
-    gulp.watch(src.js,gulp.series(gulp.parallel(js_concat,js_compress),bs_reload));
+    gulp.watch(src.js,gulp.series(js_concat,js_compress));
     //gulp.watch(src.js,js_compress);
     //gulp.watch(src.js,bs_reload);
-    gulp.watch(src.images,gulp.series(imagemin,bs_reload));
+    gulp.watch(src.images,Imagemin);
     //gulp.watch(src.images,bs_reload);
-    gulp.watch(src.svgs,gulp.series(svgmin,bs_reload));
+    gulp.watch(src.svgs,Svgmin);
     //gulp.watch(src.svgs,bs_reload);
 }
 
@@ -145,4 +145,4 @@ exports.svgmin = Svgmin;
 exports.watch = watch;
 exports.bs = bs;
 exports.build = gulp.series(scss,js_concat,js_compress,Imagemin,Svgmin);
-exports.default = gulp.parallel(bs,watch);
+exports.default = gulp.series(watch);

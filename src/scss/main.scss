@@ -1,4 +1,25 @@
-.block{
-    background: pink;
-    margin-left: 19px;
-}
+//=====base=====
+//色や文字の大きさの変数の定義
+@import "./base/variables";//resetより先に書くこと
+//サイト全体の初期化
+@import "./base/reset";
+//mixin
+@import "./base/mixin";
+//font-awesome
+//@import "./base/lib/fa/fontawesome";
+//@import "./base/lib/fa/solid";
+//@import "./base/lib/fa/brands";
+//@import "./base/lib/fa/brands";
+
+//=====components=====
+//-----parts-----
+//レイアウト
+@import "./components/parts/layouts";
+
+//-----common-----
+
+//-----others-----
+
+//=====pages=====
+
+//======utils=====
