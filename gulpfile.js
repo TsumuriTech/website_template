@@ -28,7 +28,7 @@ var dist = {
 }
 
 // Sass
-function sass(){
+function scss(){
     return gulp.src(src.scss)
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sourcemaps.init())
@@ -68,13 +68,13 @@ function js_compress() {
 
 
 function watch(){
-    gulp.watch(src.wscss,sass);
+    gulp.watch(src.wscss,scss);
     gulp.watch(src.js,gulp.series(js_concat,js_compress));
     gulp.watch(src.images,image_min);
 }
 
 
-exports.sass = sass;
+exports.sass = scss;
 exports.js_concat = js_concat;
 exports.js_compress = js_compress;
 exports.imagemin = image_min;
