@@ -31,9 +31,9 @@ var src = {
 
 var dist = {
     dist:'./dist/',
-    images:'./dist/images/',
-    js:'./dist/js/',
-    css:'./dist/css/'
+    images:'./dist/assets/images/',
+    js:'./dist/assets/js/',
+    css:'./dist/assets/css/'
 }
 
 // Sass

@@ -1,6 +1,10 @@
 # 各フォルダの説明
-MindBemding
 - dist:最終的にweb上に適用されるcss、js、画像
+	- html
+	- assets
+		- js
+		- css
+		- images
 - src:このファイル内のもろもろをgulpで処理して、distファイルに送る
 	- js:javaScriptの入るフォルダ
 	- images:画像の入るフォルダ
@@ -11,5 +15,4 @@ MindBemding
 			- parts:BEMのelementを持たないblock(ボタンやレイアウトなど)
 		- pages:ページ特有のデザインを入れるフォルダ
 		- utils:上書きによって微調整するための、ミニマルなscssファイル
-- 各種htmlファイル
 - package.jsonなどの設定ファイル
