@@ -1,0 +1,21 @@
+@charset "UTF-8";
+//fonts
+@mixin menu-font(){
+    //cssのプロパティを複数登録しておき、適用したい場所に@includeする
+    font-family: $font-sub;
+    font-weight: "300";
+}
+@mixin title-font(){
+    font-family: $font-sub;
+    font-weight: "400";
+}
+@mixin mq-sp($max: $sp-max-width){
+    @media only screen and (max-width: #{$max}){//スクリーンかつ最大幅が$maxのときのみ中を読み込む
+        @content;//mixinのinclude先でcontentの中身を書くことができる
+    }
+}
+@mixin mq-pc($min: $pc-min-width){
+    @media only screen and (min-width: #{$min}){
+        @content;
+    }
+}

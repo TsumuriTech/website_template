@@ -1,0 +1,23 @@
+//color Hex値
+$color-base: #fbf7f3;
+$color-main-text: #474747;
+$color-link: #878378;
+$color-white: #fff;
+$color-reverse-line: #fff;
+$color-reverse-fill: #252525;
+$color-gray: #888888;
+//sizes
+$base-content-width: 1180px;
+$space-unit: 20px;
+$sp-space-unit: 15px;
+$column-space: $space-unit*2;
+$sp-menu-width: 200px;
+//インジケーター
+$color-black: #252525;
+//paths
+$image-path: "../images/";//パスを変数化することで。修正が楽に
+//font
+$font-sub: "Lato";
+//breakpoints
+$sp-max-width:640px;
+$pc-min-width:641px;
