@@ -10,6 +10,7 @@ var uglify       = require('gulp-uglify');
 var rename       = require("gulp-rename");
 var postcss      = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
+var babel = require('gulp-babel');
 
 var src = {
     src:'./',
@@ -33,7 +34,9 @@ function scss(){
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(postcss([ autoprefixer() ]))
+    .pipe(postcss([ autoprefixer({
+      browserlist:["defaults", "last 2 versions", "ie >= 11"]
+    })]))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(dist.css));
 }
@@ -53,6 +56,9 @@ function js_concat(){
     .pipe( plumber({errorHandler: notify.onError("Error: <%= error.message %>")}) )
     .pipe( jshint() )
     .pipe( jshint.reporter( 'default' ) )
+    .pipe(babel({
+		presets: ['@babel/preset-env']
+	}))
     .pipe( concat( 'bundle.js' ) )
     .pipe( gulp.dest(dist.js) );
 }
