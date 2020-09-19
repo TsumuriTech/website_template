@@ -20,7 +20,7 @@ var src = {
     js:'./src/js/*.js',
     jslib:'./src/js/lib/*.js'
 }
-const dist_abs = "C:/Program Files/Ampps/www/";
+const dist_abs = "C:/Program Files/Ampps/www/wordpress.localhost/wp-content/themes/";
 var dist = {
     dist:'./dist/',
     images:'./dist/assets/images/',
