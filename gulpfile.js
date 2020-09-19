@@ -20,7 +20,7 @@ var src = {
     js:'./src/js/*.js',
     jslib:'./src/js/lib/*.js'
 }
-
+const dist_abs = "C:/Program Files/Ampps/www/";
 var dist = {
     dist:'./dist/',
     images:'./dist/assets/images/',
@@ -72,11 +72,16 @@ function js_compress() {
         .pipe( gulp.dest(dist.js) );
 }
 
+function dist_localhost(){
+    return gulp.src(dist.dist + '/**',{base : dist.dist})
+    .pipe(gulp.dest(dist_abs + 'dist/'));
+}
 
 function watch(){
     gulp.watch(src.wscss,scss);
     gulp.watch(src.js,gulp.series(js_concat,js_compress));
     gulp.watch(src.images,image_min);
+    gulp.watch(dist.dist + '**', dist_localhost);
 }
 
 
@@ -84,6 +89,7 @@ exports.sass = scss;
 exports.js_concat = js_concat;
 exports.js_compress = js_compress;
 exports.imagemin = image_min;
+exports.dist_localhost = dist_localhost;
 exports.watch = watch;
 exports.build = gulp.series(sass,js_concat,js_compress,image_min);
 exports.default = gulp.series(watch);
