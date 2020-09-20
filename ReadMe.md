@@ -15,6 +15,7 @@
 			- parts:BEMのelementを持たないblock(ボタンやレイアウトなど)
 		- pages:ページ特有のデザインを入れるフォルダ
 		- utils:上書きによって微調整するための、ミニマルなscssファイル
+		- _s:wordpressスターターテーマのscss
 - package.jsonなどの設定ファイル
 
 # 環境構築方法

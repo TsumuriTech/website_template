@@ -12,13 +12,14 @@ var postcss      = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
 var babel = require('gulp-babel');
 
+const style_scss = "./src/scss/_s/style.scss";
+
 var src = {
-    src:'./',
-    scss:'./src/scss/*.scss',
-    wscss:'./src/scss/**/*.scss',
-    images:'./src/images/**/*.+(jpg|jpeg|png|gif|svg)',
-    js:'./src/js/*.js',
-    jslib:'./src/js/lib/*.js'
+    scss:'src/scss/*.scss',
+    wscss:'src/scss/**/*.scss',
+    images:'src/images/**/*.+(jpg|jpeg|png|gif|svg)',
+    js:'src/js/*.js',
+    jslib:'src/js/lib/*.js'
 }
 const dist_abs = "C:/Program Files/Ampps/www/wordpress.localhost/wp-content/themes/";
 var dist = {
@@ -41,6 +42,17 @@ function scss(){
     .pipe(gulp.dest(dist.css));
 }
 
+function scss_s(){
+    return gulp.src(style_scss)
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    .pipe(postcss([ autoprefixer({
+      browserlist:["defaults", "last 2 versions", "ie >= 11"]
+    })]))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(dist.dist));
+}
 
 // imagemin
 function image_min() {
@@ -79,6 +91,7 @@ function dist_localhost(){
 
 function watch(){
     gulp.watch(src.wscss,scss);
+    gulp.watch(src.wscss,scss_s);
     gulp.watch(src.js,gulp.series(js_concat,js_compress));
     gulp.watch(src.images,image_min);
     gulp.watch(dist.dist + '**', dist_localhost);
@@ -86,6 +99,7 @@ function watch(){
 
 
 exports.sass = scss;
+exports.sass_s = scss_s;
 exports.js_concat = js_concat;
 exports.js_compress = js_compress;
 exports.imagemin = image_min;
