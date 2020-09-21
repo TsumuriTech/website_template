@@ -1,13 +1,13 @@
 @charset "UTF-8";
 //@import "./lib/reset";
-/*
+
 :root, html, body {//複数のセレクタを同時に指定できるらしい。:rootはhtmlセレクターと同様
     //ただし、:rootはhtmlより詳細度が高い
     background-color: $color-base;//背景色指定
     color: $color-main-text;//文字色指定
     width: 100%;//幅指定
 }
-*/
+
 *{
     box-sizing: border-box;//widthにborderを含める。borderとの他borderとの余白はmarginで決まる
 }
