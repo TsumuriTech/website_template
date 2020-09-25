@@ -1,41 +1,33 @@
 {
-  "name": "site",
+  "name": "website_template",
   "version": "1.0.0",
-  "description": "ここは作業フォルダです。\r 以下にそれぞれにフォルダの説明を記します。",
-  "main": "index.js",
+  "description": "- dist:最終的にweb上に適用されるcss、js、画像\r \t- html\r \t- assets\r \t\t- js\r \t\t- css\r \t\t- images\r - src:このファイル内のもろもろをgulpで処理して、distファイルに送る\r \t- js:javaScriptの入るフォルダ\r \t- images:画像の入るフォルダ\r \t- scss:各種scssの入るフォルダ\r \t\t- base:リセットcss、各種ライブラリ、ページ全体の設定、変数用scssの入るフォルダ\r \t\t- components:BEMにおける各blockに適用するスタイル用\r \t\t\t- common:汎用的なcomponentファイル\r \t\t\t- parts:BEMのelementを持たないblock(ボタンやレイアウトなど)\r \t\t- pages:ページ特有のデザインを入れるフォルダ\r \t\t- utils:上書きによって微調整するための、ミニマルなscssファイル\r - package.jsonなどの設定ファイル",
+  "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp",
+    "start": "gulp"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
-    "browser-sync": "^2.26.7",
-    "css-declaration-sorter": "^5.1.1",
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "autoprefixer": "^9.8.5",
+    "bootstrap": "^4.5.2",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
-    "gulp-changed": "^4.0.2",
+    "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
-    "gulp-ejs": "^5.0.0",
     "gulp-imagemin": "^7.1.0",
     "gulp-jshint": "^2.1.0",
     "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^8.0.0",
-    "gulp-progeny": "^0.4.1",
     "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-sass-glob": "^1.1.0",
+    "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp-svgmin": "^2.2.0",
     "gulp-uglify": "^3.0.2",
-    "imagemin-gifsicle": "^7.0.0",
-    "imagemin-jpeg-recompress": "^6.0.0",
-    "imagemin-mozjpeg": "^8.0.0",
-    "imagemin-pngquant": "^8.0.0",
-    "jshint": "^2.11.0"
-  },
-  "dependencies": {
-    "postcss-cli": "^7.1.0"
+    "jshint": "^2.11.1"
   }
 }

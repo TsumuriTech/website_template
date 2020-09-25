@@ -16,3 +16,13 @@
 		- pages:ページ特有のデザインを入れるフォルダ
 		- utils:上書きによって微調整するための、ミニマルなscssファイル
 - package.jsonなどの設定ファイル
+
+# 環境構築方法
+`npm install`
+
+# 実行方法
+`npm run gulp`
+
+または
+
+`npm run start`
