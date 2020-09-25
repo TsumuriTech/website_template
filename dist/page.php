@@ -9,7 +9,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package blogblog_s_wordpress_wordpress
+ * @package _s
  */
 
 get_header();

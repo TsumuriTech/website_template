@@ -6,13 +6,19 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package blogblog_s_wordpress_wordpress
+ * @package _s
  */
 
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
+	<meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@" />
+    <meta property="og:url" content="https"/>
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="https" />
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
@@ -23,7 +29,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'blogblog_s_wordpress_wordpress' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', '_s' ); ?></a>
 
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
@@ -38,15 +44,15 @@
 				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 				<?php
 			endif;
-			$blog_s_wordpress_description = get_bloginfo( 'description', 'display' );
-			if ( $blog_s_wordpress_description || is_customize_preview() ) :
+			$_s_description = get_bloginfo( 'description', 'display' );
+			if ( $_s_description || is_customize_preview() ) :
 				?>
-				<p class="site-description"><?php echo $blog_s_wordpress_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+				<p class="site-description"><?php echo $_s_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'blogblog_s_wordpress_wordpress' ); ?></button>
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', '_s' ); ?></button>
 			<?php
 			wp_nav_menu(
 				array(

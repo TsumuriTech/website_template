@@ -4,7 +4,7 @@
  *
  * @link https://jetpack.com/
  *
- * @package blogblog_s_wordpress_wordpress
+ * @package _s
  */
 
 /**
@@ -14,13 +14,13 @@
  * See: https://jetpack.com/support/responsive-videos/
  * See: https://jetpack.com/support/content-options/
  */
-function blog_s_wordpress_jetpack_setup() {
+function _s_jetpack_setup() {
 	// Add theme support for Infinite Scroll.
 	add_theme_support(
 		'infinite-scroll',
 		array(
 			'container' => 'main',
-			'render'    => 'blog_s_wordpress_infinite_scroll_render',
+			'render'    => '_s_infinite_scroll_render',
 			'footer'    => 'page',
 		)
 	);
@@ -33,7 +33,7 @@ function blog_s_wordpress_jetpack_setup() {
 		'jetpack-content-options',
 		array(
 			'post-details' => array(
-				'stylesheet' => 'blogblog_s_wordpress_wordpress-style',
+				'stylesheet' => '_s-style',
 				'date'       => '.posted-on',
 				'categories' => '.cat-links',
 				'tags'       => '.tags-links',
@@ -48,12 +48,12 @@ function blog_s_wordpress_jetpack_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'blog_s_wordpress_jetpack_setup' );
+add_action( 'after_setup_theme', '_s_jetpack_setup' );
 
 /**
  * Custom render function for Infinite Scroll.
  */
-function blog_s_wordpress_infinite_scroll_render() {
+function _s_infinite_scroll_render() {
 	while ( have_posts() ) {
 		the_post();
 		if ( is_search() ) :

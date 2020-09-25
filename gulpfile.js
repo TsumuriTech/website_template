@@ -21,12 +21,12 @@ var src = {
     js:'src/js/*.js',
     jslib:'src/js/lib/*.js'
 }
-const dist_abs = "C:/Program Files/Ampps/www/wordpress.localhost/wp-content/themes/";
+const dist_abs = "C:/Users/GSTV/Ampps/www/wordpress.localhost/wp-content/themes/";
 var dist = {
     dist:'./dist/',
     images:'./dist/assets/images/',
     js:'./dist/assets/js/',
-    css:'./dist/assets/css/'
+    css:'./dist/'
 }
 
 // Sass
@@ -41,7 +41,7 @@ function scss(){
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(dist.css));
 }
-
+/*
 function scss_s(){
     return gulp.src(style_scss)
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
@@ -52,7 +52,7 @@ function scss_s(){
     })]))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(dist.dist));
-}
+}*/
 
 // imagemin
 function image_min() {
@@ -91,7 +91,7 @@ function dist_localhost(){
 
 function watch(){
     gulp.watch(src.wscss,scss);
-    gulp.watch(src.wscss,scss_s);
+    //gulp.watch(src.wscss,scss_s);
     gulp.watch(src.js,gulp.series(js_concat,js_compress));
     gulp.watch(src.images,image_min);
     gulp.watch(dist.dist + '**', dist_localhost);
@@ -99,7 +99,7 @@ function watch(){
 
 
 exports.sass = scss;
-exports.sass_s = scss_s;
+//exports.sass_s = scss_s;
 exports.js_concat = js_concat;
 exports.js_compress = js_compress;
 exports.imagemin = image_min;

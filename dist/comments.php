@@ -7,7 +7,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package blogblog_s_wordpress_wordpress
+ * @package _s
  */
 
 /*
@@ -28,18 +28,18 @@ if ( post_password_required() ) {
 		?>
 		<h2 class="comments-title">
 			<?php
-			$blog_s_wordpress_comment_count = get_comments_number();
-			if ( '1' === $blog_s_wordpress_comment_count ) {
+			$_s_comment_count = get_comments_number();
+			if ( '1' === $_s_comment_count ) {
 				printf(
 					/* translators: 1: title. */
-					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'blogblog_s_wordpress_wordpress' ),
+					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', '_s' ),
 					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
 				);
 			} else {
 				printf( 
 					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $blog_s_wordpress_comment_count, 'comments title', 'blogblog_s_wordpress_wordpress' ) ),
-					number_format_i18n( $blog_s_wordpress_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $_s_comment_count, 'comments title', '_s' ) ),
+					number_format_i18n( $_s_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
 				);
 			}
@@ -65,7 +65,7 @@ if ( post_password_required() ) {
 		// If comments are closed and there are comments, let's leave a little note, shall we?
 		if ( ! comments_open() ) :
 			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'blogblog_s_wordpress_wordpress' ); ?></p>
+			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', '_s' ); ?></p>
 			<?php
 		endif;
 

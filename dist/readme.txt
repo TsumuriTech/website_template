@@ -1,4 +1,4 @@
-=== blog_s_wordpress ===
+=== _s ===
 
 Contributors: automattic
 Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
@@ -10,7 +10,7 @@ Stable tag: 1.0.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
 
-A starter theme called blogblog_s_wordpress_wordpress.
+A starter theme called _s.
 
 == Description ==
 
@@ -26,7 +26,7 @@ Description
 
 = Does this theme support any plugins? =
 
-blog_s_wordpress includes support for WooCommerce and for Infinite Scroll in Jetpack.
+_s includes support for WooCommerce and for Infinite Scroll in Jetpack.
 
 == Changelog ==
 
